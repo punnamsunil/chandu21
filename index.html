@@ -6,7 +6,6 @@
 
 <title>మండప నిర్మాణ దాతలు</title>
 
-<!-- Excel reader library -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <style>
@@ -17,8 +16,6 @@ font-family:Arial;
 background:#f4f4f4;
 text-align:center;
 }
-
-/* HEADER */
 
 header{
 background:#FF8C00;
@@ -41,8 +38,6 @@ font-size:16px;
 margin-top:6px;
 }
 
-/* SEARCH */
-
 .search-box{
 margin-top:15px;
 }
@@ -56,7 +51,21 @@ border:1px solid #ccc;
 font-size:16px;
 }
 
-/* CARD LIST */
+/* SOUND BUTTON */
+
+.sound-btn{
+position:fixed;
+top:15px;
+right:15px;
+background:black;
+color:white;
+border:none;
+padding:10px 14px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* CARDS */
 
 .container{
 width:90%;
@@ -131,7 +140,6 @@ left:0;
 right:0;
 bottom:0;
 padding:3px;
-
 border-radius:12px;
 
 background:linear-gradient(
@@ -220,12 +228,14 @@ color:#ccc;
 
 <body>
 
+<button class="sound-btn" onclick="toggleSound()">🔊</button>
+
 <header>
 
-<div class="title">ధర్మరక్షతి రక్షితః</div>
+<div class="title"> ధర్మోరక్షతి రక్షితః</div>
 
 <div class="temple">
-శ్రీశ్రీ సీతారామస్వామి దేవాలయం, కొత్తగుంత
+శ్రీశ్రీశ్రీ సీతారామస్వామి దేవాలయం,కొత్తగుంపు 
 </div>
 
 <div class="sub">
@@ -254,23 +264,54 @@ color:#ccc;
 
 </div>
 
+<!-- AUDIO -->
+
+<audio id="mantra" loop>
+<source src="jai-sri-ram.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+
+let donors=[];
+
+/* AUDIO PLAY AFTER FIRST CLICK */
+
+document.body.addEventListener("click",function(){
+document.getElementById("mantra").play();
+},{once:true});
+
+/* MUTE BUTTON */
+
+function toggleSound(){
+let audio=document.getElementById("mantra");
+audio.muted=!audio.muted;
+}
 
 /* LOAD EXCEL */
 
 fetch("donors.xlsx")
-.then(res => res.arrayBuffer())
-.then(data => {
+.then(res=>res.arrayBuffer())
+.then(data=>{
 
-let workbook = XLSX.read(data);
+let workbook=XLSX.read(data);
 
-let sheet = workbook.Sheets[workbook.SheetNames[0]];
+let sheet=workbook.Sheets[workbook.SheetNames[0]];
 
-let donors = XLSX.utils.sheet_to_json(sheet);
+donors=XLSX.utils.sheet_to_json(sheet);
+
+displayDonors(donors);
+
+});
+
+/* DISPLAY CARDS */
+
+function displayDonors(list){
 
 let container=document.getElementById("donorContainer");
 
-donors.forEach(d=>{
+container.innerHTML="";
+
+list.forEach(d=>{
 
 let card=document.createElement("div");
 
@@ -288,27 +329,23 @@ container.appendChild(card);
 
 });
 
-});
+}
 
-/* SEARCH */
+/* SEARCH (TELUGU + ENGLISH) */
 
 function searchDonor(){
 
 let input=document.getElementById("searchInput").value.toLowerCase();
 
-let cards=document.querySelectorAll(".card");
+let filtered=donors.filter(d=>{
 
-cards.forEach(card=>{
+let name=(d.Name||"").toLowerCase();
 
-let name=card.querySelector(".name").innerText.toLowerCase();
-
-if(name.includes(input)){
-card.style.display="block";
-}else{
-card.style.display="none";
-}
+return name.includes(input);
 
 });
+
+displayDonors(filtered);
 
 }
 
@@ -325,13 +362,12 @@ document.getElementById("pdate").innerText=date;
 }
 
 function closeCard(){
-
 document.getElementById("popup").style.display="none";
-
 }
 
 </script>
 
 </body>
 </html>
+
 
