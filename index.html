@@ -1,16 +1,18 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="te">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>మండప నిర్మాణ దాతలు</title>
 
 <style>
 
 body{
-font-family:Arial;
-background:#f3f3f3;
 margin:0;
+font-family:Arial;
+background:#f5f5f5;
 text-align:center;
 }
 
@@ -29,12 +31,12 @@ font-weight:bold;
 
 .temple{
 font-size:20px;
-margin-top:6px;
+margin-top:5px;
 }
 
 .sub{
+margin-top:6px;
 font-size:17px;
-margin-top:8px;
 }
 
 /* SEARCH */
@@ -44,12 +46,12 @@ margin-top:15px;
 }
 
 .search-box input{
+padding:10px;
 width:80%;
 max-width:400px;
-padding:10px;
-font-size:16px;
 border-radius:6px;
 border:1px solid #ccc;
+font-size:16px;
 }
 
 /* SOUND BUTTON */
@@ -58,7 +60,7 @@ border:1px solid #ccc;
 position:fixed;
 top:15px;
 right:15px;
-background:#111;
+background:black;
 color:white;
 border:none;
 padding:10px 14px;
@@ -69,30 +71,23 @@ cursor:pointer;
 /* CARD LIST */
 
 .container{
-height:420px;
 width:90%;
 max-width:600px;
 margin:auto;
 margin-top:20px;
+height:420px;
 overflow-y:auto;
 padding:10px;
-scroll-behavior:smooth;
--webkit-overflow-scrolling:touch;
 }
 
 .card{
 background:white;
-padding:20px;
-margin:15px 0;
-border-radius:12px;
-box-shadow:0 5px 12px rgba(0,0,0,0.15);
+padding:18px;
+margin:12px 0;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
 text-align:left;
 cursor:pointer;
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.02);
 }
 
 .name{
@@ -102,7 +97,7 @@ font-weight:bold;
 
 .amount{
 color:green;
-margin-top:5px;
+margin-top:4px;
 }
 
 .date{
@@ -147,8 +142,9 @@ top:0;
 left:0;
 right:0;
 bottom:0;
-border-radius:12px;
 padding:3px;
+
+border-radius:12px;
 
 background:linear-gradient(
 45deg,
@@ -163,7 +159,7 @@ red
 );
 
 background-size:400%;
-animation:rainbowMove 6s linear infinite;
+animation:rainbow 6s linear infinite;
 
 -webkit-mask:
 linear-gradient(#000 0 0) content-box,
@@ -202,16 +198,18 @@ background-size:400%;
 filter:blur(12px);
 opacity:0.7;
 
-animation:rainbowMove 6s linear infinite;
+animation:rainbow 6s linear infinite;
 
 z-index:-1;
 
 }
 
-@keyframes rainbowMove{
+@keyframes rainbow{
+
 0%{background-position:0% 50%;}
 50%{background-position:100% 50%;}
 100%{background-position:0% 50%;}
+
 }
 
 .popup-name{
@@ -232,17 +230,16 @@ color:#ccc;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<button class="sound-btn" onclick="toggleSound()">🔊 Mute</button>
+<button class="sound-btn" onclick="toggleSound()">🔊</button>
 
 <header>
 
-<div class="title">
-ధర్మరక్షతి రక్షితః
-</div>
+<div class="title">ధర్మరక్షతి రక్షితః</div>
 
 <div class="temple">
 శ్రీశ్రీ సీతారామస్వామి దేవాలయం, కొత్తగుంత
@@ -258,27 +255,31 @@ color:#ccc;
 
 </header>
 
-<div class="container" id="donorList">
+<div class="container">
 
-<div class="card" data-name="ramaiah" onclick="openCard('రామయ్య గారు','₹10,000','12-02-2026')">
+<div class="card" data-name="ramaiah"
+onclick="openCard('రామయ్య గారు','₹10,000','12-02-2026')">
 <div class="name">రామయ్య గారు</div>
 <div class="amount">₹10,000</div>
 <div class="date">12-02-2026</div>
 </div>
 
-<div class="card" data-name="sitamma" onclick="openCard('సీతమ్మ గారు','₹5,000','15-02-2026')">
+<div class="card" data-name="sitamma"
+onclick="openCard('సీతమ్మ గారు','₹5,000','15-02-2026')">
 <div class="name">సీతమ్మ గారు</div>
 <div class="amount">₹5,000</div>
 <div class="date">15-02-2026</div>
 </div>
 
-<div class="card" data-name="venkateshwarulu" onclick="openCard('వెంకటేశ్వర్లు గారు','₹25,000','20-02-2026')">
+<div class="card" data-name="venkatesh"
+onclick="openCard('వెంకటేశ్వర్లు గారు','₹25,000','20-02-2026')">
 <div class="name">వెంకటేశ్వర్లు గారు</div>
 <div class="amount">₹25,000</div>
 <div class="date">20-02-2026</div>
 </div>
 
-<div class="card" data-name="lakshmi" onclick="openCard('లక్ష్మి గారు','₹3,000','21-02-2026')">
+<div class="card" data-name="lakshmi"
+onclick="openCard('లక్ష్మి గారు','₹3,000','21-02-2026')">
 <div class="name">లక్ష్మి గారు</div>
 <div class="amount">₹3,000</div>
 <div class="date">21-02-2026</div>
@@ -293,7 +294,9 @@ color:#ccc;
 <div class="popup-card">
 
 <div class="popup-name" id="pname"></div>
+
 <div class="popup-amount" id="pamount"></div>
+
 <div class="popup-date" id="pdate"></div>
 
 </div>
@@ -308,22 +311,25 @@ color:#ccc;
 
 <script>
 
+/* PLAY AUDIO AFTER FIRST CLICK */
+
+document.body.addEventListener("click",function(){
+
+document.getElementById("mantra").play();
+
+},{once:true});
+
+/* MUTE BUTTON */
+
 const audio=document.getElementById("mantra");
-const btn=document.querySelector(".sound-btn");
 
 function toggleSound(){
 
-if(audio.muted){
-audio.muted=false;
-btn.innerText="🔊 Mute";
-}else{
-audio.muted=true;
-btn.innerText="🔇 Unmute";
-}
+audio.muted=!audio.muted;
 
 }
 
-/* SEARCH FUNCTION */
+/* SEARCH */
 
 function searchDonor(){
 
@@ -333,10 +339,10 @@ let cards=document.querySelectorAll(".card");
 
 cards.forEach(card=>{
 
-let teluguName=card.querySelector(".name").innerText.toLowerCase();
-let englishName=card.getAttribute("data-name");
+let telugu=card.querySelector(".name").innerText.toLowerCase();
+let english=card.getAttribute("data-name");
 
-if(teluguName.includes(input) || englishName.includes(input)){
+if(telugu.includes(input) || english.includes(input)){
 card.style.display="block";
 }else{
 card.style.display="none";
@@ -359,11 +365,12 @@ document.getElementById("pdate").innerText=date;
 }
 
 function closeCard(){
+
 document.getElementById("popup").style.display="none";
+
 }
 
 </script>
 
 </body>
 </html>
-
